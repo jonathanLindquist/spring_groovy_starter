@@ -1,0 +1,48 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id 'com.palantir.docker' version '0.20.1'
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.jlindquist.groovy'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+bootJar {
+	baseName = 'groovy-docker'
+	version = '0.0.1'
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+docker {
+	name "${project.group}/${bootJar.baseName}"
+	files bootJar.archivePath
+	buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+}
