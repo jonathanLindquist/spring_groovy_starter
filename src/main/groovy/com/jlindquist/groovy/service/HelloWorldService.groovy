@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
 @Service(value = 'HelloWorldService')
+@Getter
+@Setter
 class HelloWorldService {
-    @Getter @Setter String serviceName
+
+    String serviceName
 
     private static Mono<String> getClassAction() {
         return Mono.just('Hello World!')
