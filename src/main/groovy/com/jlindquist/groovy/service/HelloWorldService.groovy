@@ -1,20 +1,19 @@
 package com.jlindquist.groovy.service
 
+import lombok.Getter
+import lombok.Setter
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 
-@Service
+@Service(value = 'HelloWorldService')
 class HelloWorldService {
-    private String serviceName
+    @Getter @Setter String serviceName
 
-    String getServiceName() {
-        return this.serviceName
+    private static Mono<String> getClassAction() {
+        return Mono.just('Hello World!')
     }
 
-    private static String getClassAction() {
-        return 'Hello World!'
-    }
-
-    String getAction() {
+    static Mono<String> getAction() {
         return getClassAction()
     }
 }
