@@ -9,7 +9,7 @@ class HelloWorldConfig {
 
     @Bean
     HelloWorldService helloWorldService() {
-        return new HelloWorldService("Hello World Service")
+        return new HelloWorldService("Hello World Service Configuration")
     }
 
 }

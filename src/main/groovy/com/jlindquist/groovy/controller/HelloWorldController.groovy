@@ -14,7 +14,7 @@ class HelloWorldController {
 
     @GetMapping('/helloworld')
     Mono<String> getHelloWorld() {
-        helloWorldService.setServiceName('Hello World Service')
+        //helloWorldService.setServiceName('Hello World Service')
         return helloWorldService.getAction()
     }
 }
